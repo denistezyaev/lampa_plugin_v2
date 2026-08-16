@@ -11,9 +11,10 @@
             if (!debugBox) {
                 debugBox = document.createElement('div');
                 debugBox.style.cssText =
-                    'position:fixed;bottom:0;left:0;right:0;max-height:35%;overflow:auto;' +
-                    'background:rgba(0,0,0,0.85);color:#0f0;font-size:16px;line-height:1.3;' +
-                    'padding:8px;z-index:999999;white-space:pre-wrap;font-family:monospace;';
+                    'position:fixed;top:0;right:0;width:32%;max-height:28%;overflow:auto;' +
+                    'background:rgba(0,0,0,0.85);color:#0f0;font-size:13px;line-height:1.25;' +
+                    'padding:6px;z-index:999999;white-space:pre-wrap;font-family:monospace;' +
+                    'pointer-events:none;';
                 (document.body || document.documentElement).appendChild(debugBox);
             }
             var line = document.createElement('div');
