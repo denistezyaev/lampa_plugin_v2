@@ -37,13 +37,16 @@
                         var tracks = e && e.tracks;
                         if (!tracks) { log('e.tracks пусто/отсутствует'); return; }
                         log('Кол-во дорожек: ' + tracks.length);
+                        var probeNames = ['language', 'lang', 'label', 'title', 'name', 'id', 'index', 'kind', 'active', 'enabled', 'codec', 'channels'];
                         tracks.forEach(function (t, i) {
-                            var keys = Object.keys(t).map(function (k) {
-                                var v = t[k];
-                                if (typeof v === 'string' && v.length > 40) v = v.slice(0, 40) + '...';
-                                return k + '=' + JSON.stringify(v);
-                            }).join(', ');
-                            log('  [' + i + '] ' + keys);
+                            var found = [];
+                            probeNames.forEach(function (k) {
+                                var v;
+                                try { v = t[k]; } catch (e) { v = '(ошибка чтения)'; }
+                                if (v !== undefined) found.push(k + '=' + JSON.stringify(v));
+                            });
+                            log('  [' + i + '] ' + (found.length ? found.join(', ') : '(ни одно из известных полей не отозвалось)'));
+                            try { log('  [' + i + '] toString: ' + String(t)); } catch (e) {}
                         });
                     } catch (err) {
                         log('Ошибка разбора e.tracks: ' + err.message);
